@@ -1,25 +1,17 @@
+//Client Side
+
 const username = prompt("What is your username?")
 const socket = io('http://localhost:9000'); 
-// const socket2 = io('http://localhost:9000/wiki') //Namespace
-// const socket3 = io('http://localhost:9000/mozilla') //Namespace
-// const socket4 = io('http://localhost:9000/linux') //Namespace
 
-
-//Test message from server
-socket.on('msg_from_server_to_client', (message)=>{
-    console.log(message);
-    //In the same function, sending a test message to server
-    socket.emit('message_to_server_from_client', {data: 'message to server'});
-});
 
 socket.on('nsList', (nsData)=>{
-    console.log('list of Namespaces', nsData)
+    console.log('list of Namespaces', nsData[0].img)
 
     let namespacesList = document.querySelector('.namespaces')
     
     for (let items of nsData){
         console.log(items.img)
-        namespacesList.innerHTML += `<div class = 'namespace'><img src=${items.img}/></div>`
+        namespacesList.innerHTML += `<ul class = 'namespace'><li><img src=${items.img}></img></li></ul>`
     }
 
 })

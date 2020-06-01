@@ -4,7 +4,7 @@ const Room =  require('../classes/Room');
 
 // Set up the namespaces using the imported objects
 let namespaces = [];
-let wikiNs = new Namespace(0,'Wiki','https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Wikipedia_Logo_1.0.png/220px-Wikipedia_Logo_1.0.png','/wiki');
+let wikiNs = new Namespace(0,'Wiki','https://www.tailorbrands.com/wp-content/uploads/2019/09/Juicy-logo-100-1-300x300.jpg','/wiki');
 let mozNs = new Namespace(1,'Mozilla','https://www.mozilla.org/media/img/logos/firefox/logo-quantum.9c5e96634f92.png','/mozilla');
 let linuxNs = new Namespace(2,'Linux','https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png','/linux');
 

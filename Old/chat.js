@@ -23,6 +23,7 @@ io.on('connect', (socket, req)=>{
         // console.log(message)
         //io sends to all clients. If we did 'socket.emit' it would not send it to everyone
         io.emit('messageToClients', {text: message.data})
+        
         //same as above, but for one namespace
         // io.of('/').emit('messageToClients', {text: message.data})
     })
@@ -31,6 +32,6 @@ io.on('connect', (socket, req)=>{
 //'Of' required when using other namespaces
 io.of('/custops').on('connect', (socket)=>{
     console.log('connected to Squarespace custops')
-    io.of('/custops').emit('welcome_to_custops', "Welcome to custops channer")
+    io.of('/custops').emit('welcome_to_custops', "Welcome to custops channel")
 })
 
