@@ -10,37 +10,26 @@ const io = socketio(expressServer)
 app.use(express.static(__dirname + '/public'));
 
 
+
+io.on('connect', (socket, req)=>{
+
+    //build an array to send back img and endpoint for each Namespace
+    let nsData = namespaces.map(ns=>{
+        return {
+            img: ns.img,
+            endpoint: ns.endpoint
+        }
+    })
+    //Non using io because we want to send it to just this client ('/'), not the entire server
+    socket.emit('nsList', nsData )
+})
+
+
 //loop through each namespace and user server to listen for a connection
 
 namespaces.map(namespace => {
     io.of(namespace.endpoint).on('connect', (socket)=>{
         console.log(`${namespace.endpoint}`, socket.id)
     })
-})
-
-
-io.on('connect', (socket, req)=>{
-
-    //Test message coming from client
-    socket.emit('msg_from_server_to_client', 'welcome to websocket')
-
-    //Test message to client
-    socket.on('message_to_server_from_client',(message)=>{
-        console.log(message, socket.id)
-    })
-
-    socket.on('newMessage_to_server_from_client',(message)=>{
-        // console.log(message)
-        //io sends to all clients. If we did 'socket.emit' it would not send it to everyone
-        io.emit('messageToClients', {text: message.data})
-        //same as above, but for one namespace
-        // io.of('/').emit('messageToClients', {text: message.data})
-    })
-})
-
-//'Of' required when using other namespaces
-io.of('/custops').on('connect', (socket)=>{
-    console.log('connected to Squarespace custops')
-    io.of('/custops').emit('welcome_to_custops', "Welcome to custops channer")
 })
 

@@ -1,12 +1,9 @@
 const username = prompt("What is your username?")
 const socket = io('http://localhost:9000'); 
-const socket2 = io('http://localhost:9000/wiki') //Namespace
-const socket3 = io('http://localhost:9000/mozilla') //Namespace
-const socket4 = io('http://localhost:9000/linux') //Namespace
+// const socket2 = io('http://localhost:9000/wiki') //Namespace
+// const socket3 = io('http://localhost:9000/mozilla') //Namespace
+// const socket4 = io('http://localhost:9000/linux') //Namespace
 
-
-//JS for Client
-const squarespace = io('http://localhost:9000/custops') //Namespace
 
 //Test message from server
 socket.on('msg_from_server_to_client', (message)=>{
@@ -15,34 +12,17 @@ socket.on('msg_from_server_to_client', (message)=>{
     socket.emit('message_to_server_from_client', {data: 'message to server'});
 });
 
-//Function when pressing the Submit button
-document.querySelector('#message-form').addEventListener('submit', (event)=>{
-event.preventDefault();
+socket.on('nsList', (nsData)=>{
+    console.log('list of Namespaces', nsData)
 
-//Grabbing the message and sending it to the server
-const chatMessage = document.querySelector('#user-message').value
-socket.emit('newMessage_to_server_from_client', {data: chatMessage});
+    let namespacesList = document.querySelector('.namespaces')
+    
+    for (let items of nsData){
+        console.log(items.img)
+        namespacesList.innerHTML += `<div class = 'namespace'><img src=${items.img}/></div>`
+    }
 
-});
-
-//Receiving back the message from the server
-socket.on('messageToClients', (data)=>{
-const message = data.text
-document.querySelector("#messages").innerHTML += `<li>${message}</li>`
 })
-
-///////////////////////////////
-///////Second Namespace/////////
-///////////////////////////////
-
-squarespace.on('connect', ()=>{
-    console.log("Squarespace", squarespace.id);    
-});
-
-squarespace.on('welcome_to_custops', (message)=>{
-    console.log(message);    
-});
-
 
 
 // const socket = io('http://localhost:9000',{
