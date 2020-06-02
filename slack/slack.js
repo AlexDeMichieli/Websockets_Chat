@@ -27,9 +27,11 @@ io.on('connect', (socket, req)=>{
 
 //loop through each namespace and user server to listen for a connection
 
-namespaces.map(namespace => {
-    io.of(namespace.endpoint).on('connect', (socket)=>{
-        console.log(`${namespace.endpoint}`, socket.id)
+namespaces.forEach(namespace => {
+    io.of(namespace.endpoint).on('connect', (nsSocket)=>{
+        console.log(`${nsSocket.id} has join ${namespace.endpoint}` )
+        //a socket has connected to one of our namespaces, we need to send that to the group
+        nsSocket.emit('nsRoomload', namespaces[0].rooms)
     })
 })
 

@@ -3,22 +3,32 @@
 const username = prompt("What is your username?")
 const socket = io('http://localhost:9000'); 
 
-
+//populating DOM with Room logos
 socket.on('nsList', (nsData)=>{
-    console.log('list of Namespaces', nsData[0].img)
 
     let namespacesList = document.querySelector('.namespaces')
     
     for (let items of nsData){
+
         namespacesList.innerHTML += `<ul class = 'namespace' ns=${items.endpoint}><img src=${items.img}></img></ul>`
     }
 
     document.querySelectorAll('.namespace').forEach(elm =>{
-
         const nameSpace = elm.getAttribute('ns')
-        elm.addEventListener('click', (e)=>{
-            console.log(nameSpace)
+            elm.addEventListener('click', (e)=>{
         })
+    })
+
+    //populating DOM with room list
+    const nsSocket = io('http://localhost:9000/wiki')
+    nsSocket.on('nsRoomload', (nsRooms)=> {
+        // console.log(nsRooms)
+        let roomList = document.querySelector('.room-list')
+
+        for (let rooms in roomList){
+            roomList.innerHTML += `<li onclick="joinRoom(1,2)"><span class="glyphicon glyphicon-lock"></span>Main Room</li>`
+        }
+
     })
 
 })
