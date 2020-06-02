@@ -1,18 +1,15 @@
 {
-  "name": "socket_io",
+  "name": "socketio201",
   "version": "1.0.0",
   "description": "",
-  "main": "basics.js",
+  "main": "chat.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon chat.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "i": "^0.3.6",
-    "nodemon": "^2.0.4",
-    "socket.io": "^2.3.0"
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1"
   }
 }
