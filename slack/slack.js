@@ -20,7 +20,7 @@ io.on('connect', (socket, req)=>{
             endpoint: ns.endpoint
         }
     })
-    //Non using io because we want to send it to just this client ('/'), not the entire server
+    //If we used IO, then when someone connected everyone on the server would get an updated list
     socket.emit('nsList', nsData )
 })
 

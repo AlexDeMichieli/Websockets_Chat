@@ -10,9 +10,16 @@ socket.on('nsList', (nsData)=>{
     let namespacesList = document.querySelector('.namespaces')
     
     for (let items of nsData){
-        console.log(items.img)
-        namespacesList.innerHTML += `<ul class = 'namespace'><li><img src=${items.img}></img></li></ul>`
+        namespacesList.innerHTML += `<ul class = 'namespace' ns=${items.endpoint}><img src=${items.img}></img></ul>`
     }
+
+    document.querySelectorAll('.namespace').forEach(elm =>{
+
+        const nameSpace = elm.getAttribute('ns')
+        elm.addEventListener('click', (e)=>{
+            console.log(nameSpace)
+        })
+    })
 
 })
 
