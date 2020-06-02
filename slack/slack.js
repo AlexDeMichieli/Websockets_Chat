@@ -22,6 +22,7 @@ io.on('connect', (socket, req)=>{
     })
     //If we used IO, then when someone connected everyone on the server would get an updated list
     socket.emit('nsList', nsData )
+    
 })
 
 

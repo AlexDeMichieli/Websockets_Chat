@@ -24,11 +24,21 @@ socket.on('nsList', (nsData)=>{
     nsSocket.on('nsRoomload', (nsRooms)=> {
         // console.log(nsRooms)
         let roomList = document.querySelector('.room-list')
-
-        for (let rooms in roomList){
-            roomList.innerHTML += `<li onclick="joinRoom(1,2)"><span class="glyphicon glyphicon-lock"></span>Main Room</li>`
+        for (let rooms in nsRooms){
+            let glyph = ''
+            if(rooms.privateRoom){
+                glyph = 'lock'
+            }else{
+                glyph = 'globe'
+            }
+            roomList.innerHTML += `<li class = "room" ><span class="glyphicon glyphicon-${glyph}"></span>${nsRooms[rooms].roomTitle}</li>`
         }
-
+        let roomNodes = document.querySelectorAll('.room')
+            roomNodes.forEach(item => {
+                item.addEventListener('click', (event)=>{
+                    console.log(event.target.innerText)
+                })
+            })
     })
 
 })
