@@ -23,14 +23,15 @@ socket.on('nsList', (nsData)=>{
     //Calling an imported function that populates DOM with room list
     joinNs('/wiki')
 
-
+    const form = document.querySelector('.message-form')
     //Function when pressing the Submit button
-    document.querySelector('.message-form').addEventListener('submit', (event)=>{
+    form.addEventListener('submit', (event)=>{
         event.preventDefault();
 
         //Grabbing the message and sending it to the server
-        const chatMessage = document.querySelector('#user-message').value
-        socket.emit('newMessage_to_server_from_client', {data: chatMessage});
+        const chatMessage = document.querySelector('#user-message')
+        socket.emit('newMessage_to_server_from_client', {data: chatMessage.value});
+        chatMessage.value = '';
     });
 
     // socket.on('message_fromClient_to_Server', (msg)=>{
