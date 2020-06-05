@@ -2,7 +2,13 @@
 //client side
 
 function joinNs(endpoint){
-
+    //check if this is a socket
+    if(nsSocket){
+        //clean up after client leaves
+        nsSocket.close();
+        //remove the event listener before gets added again. Can create duplicates in chat when changing Namespaces
+        document.querySelector('#user-input').removeEventListener('submit', formSubmission)
+    }
     nsSocket = io(`http://localhost:9000${endpoint}`)
     nsSocket.on('nsRoomload', (nsRooms)=> {
         // console.log(nsRooms)
@@ -20,7 +26,7 @@ function joinNs(endpoint){
         let roomNodes = document.querySelectorAll('.room')
             roomNodes.forEach(item => {
                 item.addEventListener('click', (event)=>{
-                    console.log(event.target.innerText)
+                    joinRoom(event.target.innerText)
                 })
             })
         //add room automatically. First time at login
@@ -29,30 +35,11 @@ function joinNs(endpoint){
     })
 
     //Function when pressing the Submit button
-    document.querySelector('.message-form').addEventListener('submit', (event)=>{
-        event.preventDefault();
-    //Grabbing the message and sending it to the server
-    const chatMessage = document.querySelector('#user-message').value
-        console.log(chatMessage)
-        nsSocket.emit('newMessage_to_server_from_client', {data: chatMessage});
-    });
+    document.querySelector('.message-form').addEventListener('submit', formSubmission)
 
+    //receiving chat messages from server
     nsSocket.on('message_to_clients_in_room', (message)=>{
         document.querySelector("#messages").innerHTML +=  buildHTML(message)
     })  
-    
-    function buildHTML(message){
-        const convertedDate = new Date(message.time).toLocaleString()
-        return  `
-        <li>
-            <div class="user-image">
-                <img src=${message.avatar} />
-            </div>
-            <div class="user-message">
-                <div class="user-name-time">${message.username}<span>${convertedDate}</span></div>
-                <div class="message-text">${message.text.data}</div>
-            </div>
-        </li>
-        `
-    }
 }
+

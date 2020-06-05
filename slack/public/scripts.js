@@ -14,9 +14,9 @@ socket.on('nsList', (nsData)=>{
     }
     //adding click listeners
     document.querySelectorAll('.namespace').forEach(elm =>{
-        const nameSpace = elm.getAttribute('ns')
             elm.addEventListener('click', (e)=>{
-                console.log(e.target)
+                const nsEndpoint = elm.getAttribute('ns')
+                joinNs(nsEndpoint)
         })
     })
 
@@ -24,20 +24,21 @@ socket.on('nsList', (nsData)=>{
     joinNs('/wiki')
 
     const form = document.querySelector('.message-form')
-    //Function when pressing the Submit button
+    
+    //Function to clean up message bar
     form.addEventListener('submit', (event)=>{
         event.preventDefault();
-
-        //Grabbing the message and sending it to the server
         const chatMessage = document.querySelector('#user-message')
-        socket.emit('newMessage_to_server_from_client', {data: chatMessage.value});
         chatMessage.value = '';
     });
 
-    // socket.on('message_fromClient_to_Server', (msg)=>{
-    //     console.log(msg)
-    //     document.querySelector('#messages').innerHTML += `<li>${msg.text}</li>`
-    // })
-
+    function formSubmission(event){
+        event.preventDefault();
+        //Grabbing the message and sending it to the server
+        const chatMessage = document.querySelector('#user-message').value
+            nsSocket.emit('newMessage_to_server_from_client', {data: chatMessage, user: username});
+            chatMessage.value = '';
+    
+    }
 })
 
