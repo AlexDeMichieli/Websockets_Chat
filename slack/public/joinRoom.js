@@ -27,9 +27,8 @@ function joinRoom(roomName){
 }
 
 
-
 function buildHTML(message){
-
+    console.log('MESSAGE', message)
     const convertedDate = new Date(message.time).toLocaleString()
     return  `
     <li>
@@ -37,7 +36,7 @@ function buildHTML(message){
             <img src=${message.avatar} />
         </div>
         <div class="user-message">
-            <div class="user-name-time">${message.username}<span>${convertedDate}</span></div>
+            <div class="user-name-time">${message.text.user}<span>${convertedDate}</span></div>
             <div class="message-text">${message.text.data}</div>
         </div>
     </li>
