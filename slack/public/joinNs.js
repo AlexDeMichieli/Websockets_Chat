@@ -48,16 +48,20 @@ function joinNs(endpoint){
 let substituteAvatar = Math.random()
 
 function formSubmission(event){
+    // const messagesChat = document.querySelector('#messages');
+    const chatMessage = document.querySelector('#user-message').value
 
     if (username === ''){
        avatar = `https://api.adorable.io/avatars/40/${substituteAvatar}`
     }
 
     event.preventDefault();
+
     //Grabbing the message and sending it to the server
-    const chatMessage = document.querySelector('#user-message').value
     nsSocket.emit('newMessage_to_server_from_client', {data: chatMessage, user: username, avatar: avatar});
-    // chatWindow.scrollTo(0,messagesChat.scrollHeight)
+    // setInterval(function reset(){messagesChat.scrollTo(0,messagesChat.scrollHeight)}, 5000)
+    
+
 
 
         // chatMessage.value = '';

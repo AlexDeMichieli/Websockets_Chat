@@ -25,7 +25,7 @@ socket.on('nsList', (nsData)=>{
     joinNs('/funRoom')
 
     const form = document.querySelector('.message-form')
-    
+
     //Function to clean up message bar
     form.addEventListener('submit', (event)=>{
         event.preventDefault();
