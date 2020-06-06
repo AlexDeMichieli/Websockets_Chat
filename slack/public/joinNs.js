@@ -45,11 +45,20 @@ function joinNs(endpoint){
 }
 
 //function to clean up submission
+let substituteAvatar = Math.random()
+
 function formSubmission(event){
+
+    if (username === ''){
+       avatar = `https://api.adorable.io/avatars/40/${substituteAvatar}`
+    }
+
     event.preventDefault();
     //Grabbing the message and sending it to the server
     const chatMessage = document.querySelector('#user-message').value
-        nsSocket.emit('newMessage_to_server_from_client', {data: chatMessage, user: username});
-        chatMessage.value = '';
+    nsSocket.emit('newMessage_to_server_from_client', {data: chatMessage, user: username, avatar: avatar});
+    // chatWindow.scrollTo(0,messagesChat.scrollHeight)
 
+
+        // chatMessage.value = '';
 }

@@ -56,7 +56,7 @@ namespaces.forEach(namespace => {
                 text: message,
                 time: Date.now(),
                 username: message,
-                avatar: 'https://via.placeholder.com/30'
+                avatar: message.avatar
             }
            
             //use socket.rooms to find in which rooms the socket is connected to
