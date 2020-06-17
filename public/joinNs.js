@@ -10,7 +10,9 @@ function joinNs(endpoint){
     //remove the event listener before gets added again. Can create duplicates in chat when changing Namespaces
     document.querySelector('#user-input').removeEventListener('submit', formSubmission)
     }
-    nsSocket = io(`http://localhost:9000${endpoint}`)
+    // nsSocket = io(`http://localhost:9000${endpoint}`)
+    nsSocket = io(`https://sla-ck-replica.herokuapp.com${endpoint}`)
+
     nsSocket.on('nsRoomload', (nsRooms)=> {
     // console.log(nsRooms)
     let roomList = document.querySelector('.room-list')
