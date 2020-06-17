@@ -49,8 +49,8 @@ namespaces.forEach(namespace => {
             const nsRoom = namespace.rooms.find((room=>{
                 return room.roomTitle === roomToJoin
             }));
-            // nsSocket.emit('history_catch_up', nsRoom.history)
-            // updateUsersinRoom(namespace, roomToJoin)
+            nsSocket.emit('history_catch_up', nsRoom.history)
+            updateUsersinRoom(namespace, roomToJoin)
         })
 
         //receiving from client
