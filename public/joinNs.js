@@ -11,7 +11,7 @@ function joinNs(endpoint){
     document.querySelector('#user-input').removeEventListener('submit', formSubmission)
     }
     // nsSocket = io(`http://localhost:9000${endpoint}`)
-    nsSocket = io(`http://localhost:9000${endpoint}`)
+    nsSocket = io(`${endpoint}`)
 
     nsSocket.on('nsRoomload', (nsRooms)=> {
     // console.log(nsRooms)
