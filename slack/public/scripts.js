@@ -1,6 +1,7 @@
 //Client Side
 
 const username = prompt("What is your username?")
+let avatar = `https://api.adorable.io/avatars/40/${username}`
 const socket = io('http://localhost:9000'); 
 let nsSocket = ''
 
@@ -21,23 +22,14 @@ socket.on('nsList', (nsData)=>{
     })
 
     //Calling an imported function that populates DOM with room list
-    joinNs('/wiki')
+    joinNs('/funRoom')
 
     const form = document.querySelector('.message-form')
-    
+
     //Function to clean up message bar
     form.addEventListener('submit', (event)=>{
         event.preventDefault();
         const chatMessage = document.querySelector('#user-message')
         chatMessage.value = '';
     });
-
-    function formSubmission(event){
-        event.preventDefault();
-        //Grabbing the message and sending it to the server
-        const chatMessage = document.querySelector('#user-message').value
-            nsSocket.emit('newMessage_to_server_from_client', {data: chatMessage, user: username});
-            chatMessage.value = '';
-    
-    }
 })
