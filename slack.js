@@ -6,9 +6,9 @@ const socketio = require('socket.io')
 let namespaces = require('./data/namespaces')
 
 // const expressServer = app.listen(9000)
-const port = 9000
-const expressServer = app.listen(port, '0.0.0.0', () => {
-    console.log('Server is running s on port: ' + port)
+const PORT = process.env.PORT || 9000
+const expressServer = app.listen(PORT, '0.0.0.0', () => {
+    console.log('Server is running s on port: ' + PORT)
 });
 
 const io = socketio(expressServer)
