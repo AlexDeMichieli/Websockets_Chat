@@ -2,7 +2,7 @@
 
 const username = prompt("What is your username?")
 let avatar = `https://api.adorable.io/avatars/40/${username}`
-const socket = io('process.env.PORT || 5000'); 
+const socket = io('http://localhost:9000'); 
 let nsSocket = ''
 
 //populating DOM with Room Namespaces icons. nsList is sent from Server.
