@@ -1,4 +1,8 @@
-###### Slack replica created powered by Socket.io.
+###### Slack replica created in vanilla Javascript.
+
+###### Core technology: websockets(Socket.io).
+
+###### How to use:
 
 ###### CD into Slack and run npm start to use.
 
