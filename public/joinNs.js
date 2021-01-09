@@ -54,7 +54,7 @@ function formSubmission(event){
     const chatMessage = document.querySelector('#user-message').value
 
     if (username === ''){
-       avatar = `https://api.adorable.io/avatars/40/${substituteAvatar}`
+       avatar = `https://ui-avatars.com/api/?name=JD`
     }
 
     event.preventDefault();
